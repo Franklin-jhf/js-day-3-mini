@@ -10,7 +10,14 @@ Create an object called car using the object literal notation ({}). Give it a ma
 */
 
 // Code here
-var car;
+var car = {
+    make: "whatever",
+    model: "pshh",
+    year: 1969,
+    getAge: function(curYear) {
+        return curYear - this.year;
+    }
+}
 
 
 /* 
@@ -20,9 +27,7 @@ Call the getAge method using the car object. Don't forget to pass the year argum
 */
 
 // Code here
-var carAge;
-
-
+var carAge = car.getAge(2017);
 
 /*
 
@@ -34,7 +39,11 @@ Create another object called anotherCar with the make, model, and year propertie
 */
 
 // Code here
-var anotherCar;
+var anotherCar = {
+    make: "ford",
+    model: "ferrari",
+    year: 1994
+}
 
 
 
@@ -45,7 +54,7 @@ Now bind the getAge method of the first car object to the context of anotherCar.
 */
 
 // Code here
-var getAgeForAnotherCar;
+var getAgeForAnotherCar = car.getAge.bind(anotherCar);
 
 
 
@@ -57,8 +66,9 @@ Now assign a year property to the window object. Give that property the value 20
 */
 
 // Code here
-var windowAge;
-
+this.year = 2000; // year = 2000 or window.year = 2000
+var windowAge = car.getAge.call(window, 2017);
+console.log(windowAge);
 /* 
 
 /* 
@@ -85,7 +95,7 @@ var customer2 = {
 }
 
 // use apply here
-
+customer1.addToTotal.apply(customer2, [1, 2, 3]);
 
 
 /*
@@ -111,10 +121,10 @@ var dog = {
 }
 
 // Code here
-var makeDogSound;
+var makeDogSound = animal.makeSound.bind(dog);
 
 // Use call or apply to invoke the makeSound method with different objects.
-
+makeDogSound.call(dog);
 
 /*
 
@@ -141,9 +151,18 @@ Now you can use my method with any object. Create an object and use my findProp 
 
 // Code here
 
+var objProp = {
+    number: 3,
+    wheels: 10,
+    name: 'Shea'
+}
+
+console.log(objWithFind.findProp.call(objProp, 'Shea'));
+
+
 
 /*
-Below is another object with a filter method. This method filters returns a new object which contains only the properties with values that match the values in the array you pass to the method. 
+Below is another object with a filter method. This method filter returns a new object which contains only the properties with values that match the values in the array you pass to the method. 
 
 */ 
 
@@ -216,6 +235,12 @@ Create a constructor function for Person. Take in the name, age, and weight of a
 */
 
 // Code here
+function Person(name, age, weight) {
+    this.name = name;
+    this.age = age;
+    this.weight = weight;
+}
+
 /* 
 11. Prototype Creation
 
@@ -224,7 +249,9 @@ Now give your Person object a prototype method called addWeight. Take in the add
 */
 
 // Code here
-
+Person.prototype.addWeight = function(addedWeight) {
+    this.weight += addedWeight;
+}
 
 /*
 12. Create Persons
@@ -234,7 +261,12 @@ Create two persons, brian and briansClone, based on your Person object. Call the
 */ 
 
 // Code here
-var brian;
-var briansClone;
+var brian = new Person("lololol", 120, 1085);
+var briansClone = new Person("shea", 18, 180);
+
+brian.addWeight(120);
+console.log(brian.weight);
+briansClone.addWeight(15);
+console.log(briansClone.weight);
 
 
